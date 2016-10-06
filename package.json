@@ -1,0 +1,53 @@
+{
+  "name": "workout_app",
+  "author": "",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node build/server.js",
+    "build": "npm run build:server && npm run build:client",
+    "dev": "npm run watch:client & npm run watch:server & nodemon build/server.js",
+    "build:prod": "NODE_ENV=production && npm run build",
+    "build:server": "webpack --config config/webpack/server.js",
+    "build:client": "webpack --config config/webpack/client.js",
+    "watch:server": "webpack --config config/webpack/server.js --watch",
+    "watch:client": "webpack --config config/webpack/client.js --watch"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.14.0",
+    "babel-eslint": "^6.1.2",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-1": "^6.13.0",
+    "css-loader": "^0.25.0",
+    "eslint": "^3.5.0",
+    "eslint-loader": "^1.5.0",
+    "eslint-plugin-react": "^6.3.0",
+    "file-loader": "^0.9.0",
+    "nodemon": "^1.10.2",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "1.13.2",
+    "webpack-stream": "^3.2.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "jade": "^1.11.0",
+    "pg": "^6.1.0",
+    "pug": "^2.0.0-beta6",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-redux": "^4.4.5",
+    "redux": "^3.6.0",
+    "redux-devtools": "^3.3.1",
+    "redux-devtools-dock-monitor": "^1.1.1",
+    "redux-devtools-log-monitor": "^1.0.11",
+    "redux-thunk": "^2.1.0"
+  }
+}
