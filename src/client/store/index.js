@@ -1,20 +1,17 @@
 // third party imports
-import {createStore as createReduxStore, compose, applyMiddleware} from "redux"
+import { createStore, compose, applyMiddleware } from "redux"
 import thunk from "redux-thunk"
+import promiseMiddleware from "redux-promise"
 // local imports
-import DevTools from "../components/DevTools"
 import reducer from "./reducer"
 
-// export a store with no initial data
-export function createStore() {
-  return createReduxStore(
-    reducer,
-    // store enhancers go here
-   compose(
-        DevTools.instrument()
-    ),
-    applyMiddleware(thunk)
-  )
-}
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // eslint-disable-line
 
-export default createStore()
+const store = createStore(
+  reducer,
+  composeEnhancers(
+    applyMiddleware(thunk, promiseMiddleware)
+  )
+)
+
+export default store

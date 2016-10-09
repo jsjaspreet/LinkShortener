@@ -4,6 +4,8 @@ import express from 'express'
 import bodyParser from 'body-parser';
 // local imports
 import { buildDir } from '../../config/projectPaths'
+import { getLinks } from './api/links/getLinks'
+import { postLink } from './api/links/postLink'
 
 // create Express app
 const app = express()
@@ -21,8 +23,22 @@ app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, 'templates'))
 
 app.post('/api/links', (req, res) => {
-  res.send(`link to process ${req.body.link}`);
+  postLink(req.body.link)
+    .then(result => result)
+  res.send({ status: 200 })
 })
+
+app.get('/api/links', (req, res) => {
+  getLinks()
+    .then(
+      (result) => {
+        res.send(result)
+      },
+      (err) => {
+        res.send({ "error": err })
+      })
+})
+
 
 app.all('*', (req, res) => {
   const resetCssLocation = '/static/styles/reset.css'

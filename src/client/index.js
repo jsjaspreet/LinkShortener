@@ -2,22 +2,19 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import { Provider } from "react-redux"
+import injectTapEventPlugin from 'react-tap-event-plugin'
+injectTapEventPlugin()
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // local imports
 import store from "./store"
-import DevTools from "./components/DevTools"
+import App from "./components/App"
 
 // render the routed application
 ReactDOM.render(
   <Provider store={store}>
-    <div style={{
-      display: "flex",
-      height: "100%"
-    }}>
-      <div>
-        REACT APP
-      </div>
-      <DevTools/>
-    </div>
+    <MuiThemeProvider>
+      <App />
+    </MuiThemeProvider>
   </Provider>,
   document.getElementById("app")
 )

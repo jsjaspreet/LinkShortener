@@ -147,7 +147,6 @@ module.exports = {
         "no-useless-constructor": "error",
         "no-useless-rename": "error",
         "object-shorthand": "error",
-        "prefer-arrow-callback": "error",
         "prefer-const": "error",
         "prefer-reflect": "error",
         "prefer-rest-params": "error",
