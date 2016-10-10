@@ -1,6 +1,20 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Paper from 'material-ui/Paper'
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
+
+
+const renderUrlDataRow = ({ url, token, clicks }) => {
+  return (
+    <TableRow key={token}>
+      <TableRowColumn>{url}</TableRowColumn>
+      <TableRowColumn>{token}</TableRowColumn>
+      <TableRowColumn>{clicks}</TableRowColumn>
+    </TableRow>
+  )
+}
+
+const renderTableRows = (urlData) => urlData.map((urlDataRow) => renderUrlDataRow(urlDataRow))
 
 
 class LinkTable extends Component {
@@ -21,26 +35,7 @@ class LinkTable extends Component {
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
-            <TableRow>
-              <TableRowColumn>http://www.google.com</TableRowColumn>
-              <TableRowColumn>John Smith</TableRowColumn>
-              <TableRowColumn>Employed</TableRowColumn>
-            </TableRow>
-            <TableRow>
-              <TableRowColumn>2</TableRowColumn>
-              <TableRowColumn>Randal White</TableRowColumn>
-              <TableRowColumn>Unemployed</TableRowColumn>
-            </TableRow>
-            <TableRow>
-              <TableRowColumn>3</TableRowColumn>
-              <TableRowColumn>Stephanie Sanders</TableRowColumn>
-              <TableRowColumn>Employed</TableRowColumn>
-            </TableRow>
-            <TableRow>
-              <TableRowColumn>4</TableRowColumn>
-              <TableRowColumn>Steve Brown</TableRowColumn>
-              <TableRowColumn>Employed</TableRowColumn>
-            </TableRow>
+            {renderTableRows(this.props.urlData)}
           </TableBody>
         </Table>
       </Paper>
@@ -48,4 +43,8 @@ class LinkTable extends Component {
   }
 }
 
-export default LinkTable
+function mapStateToProps({ urlData }) {
+  return { urlData }
+}
+
+export default connect(mapStateToProps)(LinkTable)

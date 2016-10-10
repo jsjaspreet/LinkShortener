@@ -12,14 +12,28 @@ export function changeFetchState(fetchState) {
   }
 }
 
+export function postUrl(link) {
+  const result = axios.post('/api/links', { link })
+  return {
+    type: SUBMIT_URL,
+    payload: result
+  }
+}
+
 
 export function submitURL(url) {
   return function(dispatch) {
     dispatch(changeFetchState(true))
 
     setTimeout(() => {
-      dispatch(changeFetchState(false))
-    }, 1000)
+      dispatch(postUrl(url))
+      // Janky way of waiting for the PG write to be committed
+      // better to do optimistic UI updates
+      setTimeout(()=> {
+        dispatch(getUrlData())
+        dispatch(changeFetchState(false))
+      }, 300)
+    }, 800)
   }
 }
 

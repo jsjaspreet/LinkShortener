@@ -7,7 +7,7 @@ import store from '../store'
 
 class App extends Component {
   componentWillMount() {
-    store.dispatch(getUrlData())
+    setInterval(()=>store.dispatch(getUrlData()), 1000)
   }
 
   render() {

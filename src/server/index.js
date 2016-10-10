@@ -5,6 +5,8 @@ import bodyParser from 'body-parser';
 // local imports
 import { buildDir } from '../../config/projectPaths'
 import { getLinks } from './api/links/getLinks'
+import { getLinkFromToken } from './api/links/getLinkFromToken'
+import { updateClickCount } from './api/links/updateClickCountForToken'
 import { postLink } from './api/links/postLink'
 
 // create Express app
@@ -26,6 +28,21 @@ app.post('/api/links', (req, res) => {
   postLink(req.body.link)
     .then(result => result)
   res.send({ status: 200 })
+})
+
+app.get('/api/links/:token', (req, res) => {
+  const token = req.params.token
+  updateClickCount(token)
+    .then(
+      getLinkFromToken(token)
+        .then(
+          (result) => {
+            res.redirect(result.url)
+          },
+          (err) => {
+            res.send({ "error": err })
+          })
+    )
 })
 
 app.get('/api/links', (req, res) => {
