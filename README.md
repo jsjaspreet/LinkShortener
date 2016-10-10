@@ -1,7 +1,20 @@
-# Javascript Webpack Starter
+# Link Shortener
 
-This project provides a starting point for react/redux applications built at DataScience including linting
-and other agree upon conventions.
+Link Shortener app built using React on the front end, Redux for app state management, Postgres for persistence, and an Express server for routing. Docker is also used to bring up the postgres database with configured table and prepopulated dummy row entry.
+
+## Prerequisites
+- Docker
+- Node > 6.0
+
+## Running the app
+
+```
+./bootstrap_pg.sh
+npm i
+npm run dev
+```
+
+
 
 ## Building Server/Client
 
